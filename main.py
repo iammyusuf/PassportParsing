@@ -80,3 +80,35 @@ def getDataBirth(text, lang="UZ"):
         
     return data
 
+
+def transliterate_text(text):
+    mapping = {
+        'A': 'А', 'B': 'Б', 'C': 'Ц', 'D': 'Д', 'E': 'Е', 'F': 'Ф', 'G': 'Г', 'H': 'Х', 'I': 'И',
+        'J': 'Й', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н', 'O': 'О', 'P': 'П', 'Q': 'К', 'R': 'Р',
+        'S': 'С', 'T': 'Т', 'U': 'У', 'V': 'В', 'W': 'В', 'X': 'КС', 'Y': 'Ы', 'Z': 'З',
+        'a': 'а', 'b': 'б', 'c': 'ц', 'd': 'д', 'e': 'е', 'f': 'ф', 'g': 'г', 'h': 'х', 'i': 'и',
+        'j': 'й', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н', 'o': 'о', 'p': 'п', 'q': 'к', 'r': 'р',
+        's': 'с', 't': 'т', 'u': 'у', 'v': 'в', 'w': 'в', 'x': 'кс', 'y': 'ы', 'z': 'з'
+    }
+
+    transliterated_text = ""
+    for char in text:
+        if char in mapping:
+            transliterated_text += mapping[char]
+        else:
+            transliterated_text += char
+
+    return transliterated_text
+
+def capitalize_text(text):
+    words = text.split()
+    capitalized_words = [word.capitalize() for word in words]
+    capitalized_text = ' '.join(capitalized_words)
+    return capitalized_text
+
+
+russian_text = transliterate_text(getFullname(text))
+capitalized_russian_text = capitalize_text(russian_text)
+print(capitalized_russian_text)
+
+
