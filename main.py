@@ -67,3 +67,16 @@ def getFullname(text, lang="UZ"):
 
     return fullname
 
+def getDataBirth(text, lang="UZ"):
+    pattern = r'\s*.*LGAN.+\s*(.+)'
+    match2 = re.search(pattern, text, re.IGNORECASE)
+    if match2:
+        
+        Birthday = match2.group(1)
+        surwords = Birthday.split()
+        data = [item for item in surwords if item.isdigit()]
+    else:
+        data = ['01','01','1900']
+        
+    return data
+
