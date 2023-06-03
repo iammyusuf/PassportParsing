@@ -1,6 +1,7 @@
 import cv2
 import pytesseract
-
+import re
+import string
 
 
 filename = "image/1.jpeg"
@@ -15,4 +16,20 @@ pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesse
 config = r'--oem 3 --psm 6'
 text = pytesseract.image_to_string(im_bw, config=config, lang='uzb')
 
-print (text)
+# GET GENDER FUNCTION 
+def getGender(text,lang="UZ"):
+    pattern = r'\s*.*SEX.+\s*(.+)'
+    match = re.search(pattern, text, re.IGNORECASE)
+    if match:
+        gendertext = match.group(1)
+        gendertext = ''.join(char for char in gendertext if char.isalpha() and char not in string.ascii_lowercase)
+        gendertext = gendertext[:3]
+        if "F" in gendertext:
+            gen = "F"
+        elif "M" in gendertext:
+            gen = "M"
+        else: 
+            gen = "NOT"
+    else:
+        return 0         
+    return gen
