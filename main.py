@@ -33,3 +33,37 @@ def getGender(text,lang="UZ"):
     else:
         return 0         
     return gen
+
+
+def getFullname(text, lang="UZ"):
+    pattern = r'ISMI\s*/\s*(?:.+)\n(.+)'
+    match = re.search(pattern, text)
+    if match:
+        name = match.group(1)
+        words = name.split()
+        name = max(words, key=len)
+    else:
+        name = ""
+    
+    pattern = r'FAMILI.+\/ SUR.+\s*(.+)'
+    match2 = re.search(pattern, text, re.IGNORECASE)
+    if match2:
+        surname = match2.group(1)
+        surwords = surname.split()
+        surname = max(surwords, key=len)
+    else:
+        surname = ""
+    
+    pattern = r'\s*.*TASI.+\s*(.+)'
+    match3 = re.search(pattern, text, re.IGNORECASE)
+    if match3:
+        lastname = match3.group(1)
+        surwords = lastname.split()
+        lastname = max(surwords, key=len)
+    else:
+        lastname = ""
+
+    fullname = surname + " " + name + " " + lastname
+
+    return fullname
+
