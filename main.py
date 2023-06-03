@@ -166,3 +166,28 @@ def getPassportNumber(text):
     else:
         # Если совпадение не найдено, возвращаем пустую строку
         return ""
+
+# Извлекаем номер паспорта
+passport_number = getPassportNumber(text)
+
+# Извлекаем пол
+gender = getGender(text)
+
+# Извлекаем полное имя
+fullname = getFullname(text)
+
+# Извлекаем дату рождения
+birth_data = getDataBirth(text)
+
+# Транслитерируем текст полного имени на русский язык
+russian_text = transliterate_text(fullname)
+
+# Приводим текст полного имени на русском языке к заглавным буквам
+capitalized_russian_text = capitalize_text(russian_text)
+
+# Выводим результаты
+print("Номер паспорта:", passport_number)
+print("Пол:", gender)
+print("Полное имя на кириллице:", fullname)
+print("Транслитерированное полное имя на русском языке:", capitalized_russian_text)
+print("Дата рождения:", '/'.join(birth_data))
